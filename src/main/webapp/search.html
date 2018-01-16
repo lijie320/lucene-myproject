@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+    	$("#searchbut").click(function(){
+    		$.ajax({
+    			url:'rearchFood',
+    			data:'keyword='+$("input[name='keyword']").val(),
+    			dataType:'json',
+    			success:function(jd){
+    				$("div[name='c']").remove()
+    				for(var i=0;i<jd.length;i++){
+    				var html="<div name='c'>"+
+    		        "<h3>"+jd[i].foodname+"</h3>"+
+    		       " <span>"+jd[i].foodname+"价格是："+jd[i].money+"</span>"+
+    		        "<hr>"+
+    		    "</div>";
+    		    $("#foodDiv").append(html)
+    				}
+    			}
+    		})
+    	})
+    })
+</script>
+</head>
+<body>
+	<div>
+		<input type="text" name="keyword"><input id="searchbut"
+			type="button" value="搜索">
+		<div id="foodDiv">
+		
+		</div>
+	</div>
+</body>
+</html>
